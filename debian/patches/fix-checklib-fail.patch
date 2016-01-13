@@ -1,0 +1,18 @@
+Description: Trigger build failure when gmp is not found
+Origin: vendor
+Forwarded: not-needed
+Author: Alessandro Ghedini <ghedo@debian.org>
+Reviewed-by: Alessandro Ghedini <ghedo@debian.org>
+Last-Update: 2012-08-08
+
+--- a/Makefile.PL
++++ b/Makefile.PL
+@@ -16,7 +16,7 @@
+   push @ARGV, sprintf "LDDLFLAGS=%s -read_only_relocs suppress", $Config::Config{'lddlflags'};
+   }
+ 
+-check_lib_or_exit(lib => 'gmp', header => 'gmp.h', @ARGV);
++assert_lib(lib => 'gmp', header => 'gmp.h', @ARGV);
+ 
+ WriteMakefile
+   (
